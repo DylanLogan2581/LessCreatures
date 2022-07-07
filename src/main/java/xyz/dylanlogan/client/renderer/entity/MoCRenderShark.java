@@ -29,9 +29,9 @@ public class MoCRenderShark extends RenderLiving {
     {
         MoCEntityShark entityshark = (MoCEntityShark) entityliving;
         super.doRender(entityshark, d, d1, d2, f, f1);
-        boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entityshark.getName()).isEmpty();
-        boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
-        boolean flag2 = MoCreatures.proxy.getDisplayPetIcons();
+        boolean flag = false;
+        boolean flag1 = false;
+        boolean flag2 = false;
         if (entityshark.renderName())
         {
             float f2 = 1.6F;
@@ -140,23 +140,6 @@ public class MoCRenderShark extends RenderLiving {
                 tessellator.addVertex(-i - 1, 8 + byte0, 0.0D);
                 tessellator.addVertex(i + 1, 8 + byte0, 0.0D);
                 tessellator.addVertex(i + 1, -1 + byte0, 0.0D);
-                if (MoCreatures.proxy.getDisplayPetHealth())
-                {
-                    float f5 = entityshark.getHealth();
-                    float f6 = entityshark.getMaxHealth();
-                    float f7 = f5 / f6;
-                    float f8 = 40F * f7;
-                    tessellator.setColorRGBA_F(0.7F, 0.0F, 0.0F, 1.0F);
-                    tessellator.addVertex(-20F + f8, -10 + byte0, 0.0D);
-                    tessellator.addVertex(-20F + f8, -6 + byte0, 0.0D);
-                    tessellator.addVertex(20D, -6 + byte0, 0.0D);
-                    tessellator.addVertex(20D, -10 + byte0, 0.0D);
-                    tessellator.setColorRGBA_F(0.0F, 0.7F, 0.0F, 1.0F);
-                    tessellator.addVertex(-20D, -10 + byte0, 0.0D);
-                    tessellator.addVertex(-20D, -6 + byte0, 0.0D);
-                    tessellator.addVertex(f8 - 20F, -6 + byte0, 0.0D);
-                    tessellator.addVertex(f8 - 20F, -10 + byte0, 0.0D);
-                }
                 tessellator.draw();
                 GL11.glEnable(3553 /* GL_TEXTURE_2D */);
                 fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, 0x20ffffff);

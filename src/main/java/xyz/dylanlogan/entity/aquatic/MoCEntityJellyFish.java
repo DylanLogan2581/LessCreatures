@@ -9,9 +9,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAquatic;
+import xyz.dylanlogan.entity.MoCEntityAquatic;
 
-public class MoCEntityJellyFish extends MoCEntityTameableAquatic {
+public class MoCEntityJellyFish extends MoCEntityAquatic {
     public float pulsingSize;
     private int poisoncounter;
 

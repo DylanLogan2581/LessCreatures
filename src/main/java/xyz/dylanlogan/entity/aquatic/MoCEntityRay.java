@@ -12,11 +12,11 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenOcean;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAquatic;
+import xyz.dylanlogan.entity.MoCEntityAquatic;
 import xyz.dylanlogan.network.MoCMessageHandler;
 import xyz.dylanlogan.network.message.MoCMessageAnimation;
 
-public class MoCEntityRay extends MoCEntityTameableAquatic {
+public class MoCEntityRay extends MoCEntityAquatic {
 
     private int poisoncounter;
     private int tailCounter;

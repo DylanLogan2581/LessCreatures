@@ -85,16 +85,12 @@ public class MoCItemFishBowl extends MoCItem {
                     if (--itemstack.stackSize == 0)
                     {
                     	ItemStack fishbowl = ((MoCEntityFishBowl.toItemStack(((MoCEntityFishy) target).getType())));
-                    	((MoCEntityFishy) target).setTamed(false);
-                    	((MoCEntityFishy) target).setOwner("");
                     	target.setDead();
                         return fishbowl;
                     }
                     else
                     {
                         entityplayer.inventory.addItemStackToInventory(MoCEntityFishBowl.toItemStack(((MoCEntityFishy) target).getType()));
-                    	((MoCEntityFishy) target).setTamed(false);
-                    	((MoCEntityFishy) target).setOwner("");
                         target.setDead();
                         return itemstack;
                     }
@@ -133,7 +129,6 @@ public class MoCItemFishBowl extends MoCItem {
                     entityfish.setTypeInt(fishBowlType);
                     entityfish.selectType();
                     worldObj.spawnEntityInWorld(entityfish);
-                    MoCTools.tameWithName((EntityPlayer) entityplayer, entityfish);
 
                     if (--itemstack.stackSize == 0)
                     {

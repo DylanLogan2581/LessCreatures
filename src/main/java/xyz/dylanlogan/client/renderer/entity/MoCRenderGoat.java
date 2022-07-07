@@ -81,11 +81,10 @@ public class MoCRenderGoat extends RenderLiving {
         tempGoat.earMov = entitygoat.earMovement();
         tempGoat.tailMov = entitygoat.tailMovement();
         tempGoat.eatMov = entitygoat.mouthMovement();
+	boolean flag = false;
+	boolean flag1 = false;
 
         super.doRender(entitygoat, d, d1, d2, f, f1);
-        boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entitygoat.getName()).isEmpty();
-        boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
-        //boolean flag2 = MoCreatures.proxy.getdisplayPetIcons();
         if (entitygoat.renderName())
         {
             float f2 = 1.6F;

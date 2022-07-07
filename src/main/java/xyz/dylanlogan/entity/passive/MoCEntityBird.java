@@ -17,9 +17,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 
-public class MoCEntityBird extends MoCEntityTameableAnimal {
+public class MoCEntityBird extends MoCEntityAnimal {
     private boolean fleeing;
     public float wingb;
     public float wingc;
@@ -311,7 +311,7 @@ public class MoCEntityBird extends MoCEntityTameableAnimal {
             }
             if (MoCreatures.isServer())
             {
-                MoCTools.tameWithName(entityplayer, this);
+                
             }
             return true;
         }

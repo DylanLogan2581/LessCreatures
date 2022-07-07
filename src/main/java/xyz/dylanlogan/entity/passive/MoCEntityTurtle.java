@@ -18,9 +18,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 
-public class MoCEntityTurtle extends MoCEntityTameableAnimal {
+public class MoCEntityTurtle extends MoCEntityAnimal {
     private boolean isSwinging;
     private boolean twistright;
     private int flopcounter;
@@ -228,7 +228,7 @@ public class MoCEntityTurtle extends MoCEntityTameableAnimal {
                                 EntityPlayer entityplayer = worldObj.getClosestPlayerToEntity(this, 24D);
                                 if (entityplayer != null)
                                 {
-                                    MoCTools.tameWithName(entityplayer, this);
+                                    
                                 }
                             }
                         }

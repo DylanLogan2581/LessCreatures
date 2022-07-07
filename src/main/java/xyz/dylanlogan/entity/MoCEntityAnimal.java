@@ -921,18 +921,6 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
                 {
                     setIsJumping(false);
                 }
-                if (MoCreatures.isServer() && this instanceof MoCEntityTameableAnimal)
-                {
-                    int chance = (getMaxTemper() - getTemper());
-                    if (chance <= 0)
-                    {
-                        chance = 5;
-                    }
-                    if (rand.nextInt(chance * 8) == 0)
-                    {
-                        MoCTools.tameWithName((EntityPlayer) riddenByEntity, (MoCEntityTameableAnimal)this);
-                    }
-                }
             }
             if ((riddenByEntity != null) && getIsTamed())
             {
@@ -1579,13 +1567,7 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
     public boolean attackEntityFrom(DamageSource damagesource, float i)
     {
         Entity entity = damagesource.getEntity();
-        //this avoids damage done by Players to a tamed creature that is not theirs
-        if (MoCreatures.proxy.enableOwnership && getOwnerName() != null && !getOwnerName().equals("") && entity != null && entity instanceof EntityPlayer && !((EntityPlayer) entity).getCommandSenderName().equals(getOwnerName()) && !MoCTools.isThisPlayerAnOP((EntityPlayer) entity)) { return false; }
 
-        /*if (MoCreatures.isServer() && getIsTamed())
-        {
-            MoCServerPacketHandler.sendHealth(this.getEntityId(), this.worldObj.provider.dimensionId, this.getHealth());
-        }*/
         if (isNotScared())
         {
             Entity tempEntity = entityToAttack;

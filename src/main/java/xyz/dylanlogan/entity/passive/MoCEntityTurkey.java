@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 
-public class MoCEntityTurkey extends MoCEntityTameableAnimal {
+public class MoCEntityTurkey extends MoCEntityAnimal {
 
     public MoCEntityTurkey(World world)
     {
@@ -61,7 +61,7 @@ public class MoCEntityTurkey extends MoCEntityTameableAnimal {
 
         if (MoCreatures.isServer() && !getIsTamed() && (itemstack != null) && (itemstack.getItem() == Items.melon_seeds))
         {
-            MoCTools.tameWithName(entityplayer, this);
+            
         }
 
         return true;

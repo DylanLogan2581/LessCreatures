@@ -15,11 +15,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 import xyz.dylanlogan.network.MoCMessageHandler;
 import xyz.dylanlogan.network.message.MoCMessageAnimation;
 
-public class MoCEntityKomodo extends MoCEntityTameableAnimal
+public class MoCEntityKomodo extends MoCEntityAnimal
 {
     public int sitCounter;
     public int tailCounter;

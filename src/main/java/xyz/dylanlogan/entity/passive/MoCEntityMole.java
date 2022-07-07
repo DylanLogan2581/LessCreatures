@@ -10,9 +10,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 
-public class MoCEntityMole extends MoCEntityTameableAnimal {
+public class MoCEntityMole extends MoCEntityAnimal {
 
     public MoCEntityMole(World world) 
     {

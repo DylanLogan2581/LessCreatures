@@ -12,9 +12,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAquatic;
+import xyz.dylanlogan.entity.MoCEntityAquatic;
 
-public class MoCEntityMediumFish extends MoCEntityTameableAquatic{
+public class MoCEntityMediumFish extends MoCEntityAquatic{
 
     public static final String fishNames[] = { "Salmon", "Cod", "Bass"};
 

@@ -16,9 +16,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 
-public class MoCEntityGoat extends MoCEntityTameableAnimal {
+public class MoCEntityGoat extends MoCEntityAnimal {
     private boolean hungry;
     private boolean swingLeg;
     private boolean swingEar;
@@ -605,14 +605,6 @@ public class MoCEntityGoat extends MoCEntityTameableAnimal {
                 }
                 this.setHealth(getMaxHealth());
                 worldObj.playSoundAtEntity(this, "mocreatures:goateating", 1.0F, 1.0F + ((rand.nextFloat() - rand.nextFloat()) * 0.2F));
-                return true;
-            }
-        }
-
-        if (MoCreatures.isServer() && !getIsTamed() && (itemstack != null) && isItemEdible(itemstack.getItem()))
-        {
-            if (MoCTools.tameWithName(entityplayer, this))
-            {
                 return true;
             }
         }

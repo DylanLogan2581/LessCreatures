@@ -19,9 +19,9 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 
-public class MoCEntityBunny extends MoCEntityTameableAnimal {
+public class MoCEntityBunny extends MoCEntityAnimal {
     public boolean pickedUp;
     public int bunnyReproduceTickerA;
     public int bunnyReproduceTickerB;
@@ -188,7 +188,7 @@ public class MoCEntityBunny extends MoCEntityTameableAnimal {
 
             if (MoCreatures.isServer() && !getIsTamed())
             {
-                MoCTools.tameWithName(entityplayer, this);
+                
             }
         }
         else

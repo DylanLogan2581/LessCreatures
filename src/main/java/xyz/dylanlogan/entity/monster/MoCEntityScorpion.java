@@ -299,7 +299,7 @@ public class MoCEntityScorpion extends MoCEntityMob {
     @Override
     public boolean entitiesToIgnore(Entity entity)
     {
-        return ((super.entitiesToIgnore(entity)) || (this.getIsTamed() && entity instanceof MoCEntityScorpion && ((MoCEntityScorpion) entity).getIsTamed()));
+	return false;
     }
 
     @Override

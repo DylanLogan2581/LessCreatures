@@ -30,9 +30,6 @@ public class MoCProxy implements IGuiHandler {
 
     //CONFIG VARIABLES
     // Client Only
-    public boolean displayPetHealth;
-    public boolean displayPetName;
-    public boolean displayPetIcons;
     public boolean animateTextures;
 
     public boolean attackDolphins;
@@ -43,8 +40,6 @@ public class MoCProxy implements IGuiHandler {
 
     public boolean easyBreeding;
     public boolean destroyDrops;
-    public boolean enableOwnership;
-    public boolean enableResetOwnership;
     public boolean elephantBulldozer;
     public boolean killallVillagers;
 
@@ -53,8 +48,6 @@ public class MoCProxy implements IGuiHandler {
 
     public int itemID;
     
-    public int maxTamed;
-    public int maxOPTamed;
     public int zebraChance;
     public int ostrichEggDropChance;
     public int rareItemDropChance;
@@ -148,21 +141,6 @@ public class MoCProxy implements IGuiHandler {
         return false;
     }
 
-    public boolean getDisplayPetName()
-    {
-        return displayPetName;
-    }
-
-    public boolean getDisplayPetIcons()
-    {
-        return displayPetIcons;
-    }
-
-    public boolean getDisplayPetHealth()
-    {
-        return displayPetHealth;
-    }
-
     public int getParticleFX()
     {
         return 0;
@@ -252,9 +230,6 @@ public class MoCProxy implements IGuiHandler {
     public void readGlobalConfigValues() 
     {
         // client-side only
-        displayPetHealth = mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "displayPetHealth", true, "Shows Pet Health").getBoolean(true);
-        displayPetName = mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "displayPetName", true, "Shows Pet Name").getBoolean(true);
-        displayPetIcons = mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "displayPetIcons", true, "Shows Pet Emotes").getBoolean(true);
         animateTextures = mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "animateTextures", true, "Animate Textures").getBoolean(true);
         // general
         itemID = mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "ItemID", 8772, "The starting ID used for MoCreatures items. Each item will increment this number by 1 for its ID.").getInt();
@@ -263,10 +238,6 @@ public class MoCProxy implements IGuiHandler {
         minDespawnLightLevel = mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "despawnLightLevel", 2, "The minimum light level threshold used to determine whether or not to despawn a farm animal. Note: Configure this value in CMS if it is installed.").getInt();
         maxDespawnLightLevel = mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "despawnLightLevel", 7, "The maximum light level threshold used to determine whether or not to despawn a farm animal. Note: Configure this value in CMS if it is installed.").getInt();
         forceDespawns = mocSettingsConfig.get(CATEGORY_MOC_GENERAL_SETTINGS, "forceDespawns", false, "If true, it will force despawns on all creatures including vanilla for a more dynamic experience while exploring world. If false, all passive mocreatures will not despawn to prevent other creatures from taking over. Note: if you experience issues with farm animals despawning, adjust despawnLightLevel. If CMS is installed, this setting must remain true if you want MoCreatures to despawn.").getBoolean(false);
-        maxTamed = mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "maxTamedPerPlayer", 10, "Max tamed creatures a player can have. Requires enableOwnership to be set to true.").getInt();
-        maxOPTamed = mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "maxTamedPerOP", 20, "Max tamed creatures an op can have. Requires enableOwnership to be set to true.").getInt();
-        enableOwnership = mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "enableOwnership", false, "Assigns player as owner for each creature they tame. Only the owner can interact with the tamed creature.").getBoolean(false);
-        enableResetOwnership = mocSettingsConfig.get(CATEGORY_OWNERSHIP_SETTINGS, "enableResetOwnerScroll", false, "Allows players to remove a tamed creatures owner essentially untaming it.").getBoolean(false);
         easyBreeding = mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "EasyBreeding", false, "Makes horse breeding simpler.").getBoolean(true);
         elephantBulldozer = mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ElephantBulldozer", true).getBoolean(true);
         zebraChance = mocSettingsConfig.get(CATEGORY_MOC_CREATURE_GENERAL_SETTINGS, "ZebraChance", 10, "The percent for spawning a zebra.").getInt();

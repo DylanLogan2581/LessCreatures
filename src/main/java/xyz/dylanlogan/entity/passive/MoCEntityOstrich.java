@@ -23,13 +23,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 import xyz.dylanlogan.entity.item.MoCEntityEgg;
 import xyz.dylanlogan.inventory.MoCAnimalChest;
 import xyz.dylanlogan.network.MoCMessageHandler;
 import xyz.dylanlogan.network.message.MoCMessageAnimation;
 
-public class MoCEntityOstrich extends MoCEntityTameableAnimal {
+public class MoCEntityOstrich extends MoCEntityAnimal {
 
     private int eggCounter;
     private int hidingCounter;

@@ -11,9 +11,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 
-public class MoCEntityRaccoon extends MoCEntityTameableAnimal{
+public class MoCEntityRaccoon extends MoCEntityAnimal{
 
     public MoCEntityRaccoon(World world)
     {
@@ -76,7 +76,7 @@ public class MoCEntityRaccoon extends MoCEntityTameableAnimal{
 
             if (MoCreatures.isServer())
             {
-                MoCTools.tameWithName(entityplayer, this);
+                
             }
             this.setHealth(getMaxHealth());
 

@@ -39,7 +39,7 @@ import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 import xyz.dylanlogan.inventory.MoCAnimalChest;
 import xyz.dylanlogan.network.MoCMessageHandler;
 import xyz.dylanlogan.network.message.MoCMessageAnimation;
@@ -47,7 +47,7 @@ import xyz.dylanlogan.network.message.MoCMessageHeart;
 import xyz.dylanlogan.network.message.MoCMessageShuffle;
 import xyz.dylanlogan.network.message.MoCMessageVanish;
 
-public class MoCEntityHorse extends MoCEntityTameableAnimal {
+public class MoCEntityHorse extends MoCEntityAnimal {
     private int gestationtime;
     private int countEating;
     private int textCounter;
@@ -1506,38 +1506,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             return true;
         }
 
-        if ((itemstack != null) && this.isAmuletHorse() && this.getIsTamed())
-        {
-            if ((this.getType() == 26 || this.getType() == 27 || this.getType() == 28) && itemstack.getItem() == MoCreatures.amuletbone)
-            {
-                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
-                vanishHorse();
-                return true;
-            }
-
-            if ((this.getType() > 47 && this.getType() < 60) && itemstack.getItem() == MoCreatures.amuletfairy)
-            {
-                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
-                vanishHorse();
-                return true;
-            }
-
-            if ((this.getType() == 39 || this.getType() == 40) && (itemstack.getItem() == MoCreatures.amuletpegasus))
-            {
-                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
-                vanishHorse();
-                return true;
-            }
-
-            if ((this.getType() == 21 || this.getType() == 22) && (itemstack.getItem() == MoCreatures.amuletghost))
-            {
-                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
-                vanishHorse();
-                return true;
-            }
-
-        }
-
         if ((itemstack != null) && (itemstack.getItem() == Items.dye) && this.getType() == 50)
         {
 
@@ -1700,7 +1668,7 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
 
             if (MoCreatures.isServer())
             {
-                MoCTools.tameWithName(entityplayer, this);
+                
             }
 
             this.setHealth(getMaxHealth());
@@ -1805,15 +1773,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             return false;
         }
 
-    }
-
-    /**
-     * Can this horse be trapped in a special amulet?
-     */
-    public boolean isAmuletHorse()
-    {
-
-        return (this.getType() >= 48 && this.getType() < 60) || this.getType() == 40 || this.getType() == 39 || this.getType() == 21 || this.getType() == 22 || this.getType() == 26 || this.getType() == 27 || this.getType() == 28;
     }
 
     /**
@@ -2062,15 +2021,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 entityhorse1.setPosition(posX, posY, posZ);
                 worldObj.spawnEntityInWorld(entityhorse1);
                 MoCTools.playCustomSound(this, "appearmagic", worldObj);
-
-                entityhorse1.setOwner(this.getOwnerName());
-                entityhorse1.setTamed(true);
-                EntityPlayer entityplayer = worldObj.getClosestPlayerToEntity(this, 24D);
-                if (entityplayer != null)
-                {
-                    MoCTools.tameWithName((EntityPlayer) entityplayer, entityhorse1);
-                }
-
                 entityhorse1.setAdult(false);
                 entityhorse1.setEdad(1);
                 int l = 22;
@@ -2322,11 +2272,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
                 baby.setTamed(true);
                 baby.setBred(true);
                 baby.setAdult(false);
-                EntityPlayer entityplayer = worldObj.getPlayerEntityByName(this.getOwnerName());
-                if (entityplayer != null)
-                {
-                    MoCTools.tameWithName(entityplayer, baby);
-                }
                 baby.setType(l);
                 break;
             }
@@ -2421,7 +2366,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
             if (getVanishC() > 100)
             {
                 setVanishC((byte) 101);
-                MoCTools.dropHorseAmulet(this);
                 dissapearHorse();
             }
 
@@ -2863,11 +2807,6 @@ public class MoCEntityHorse extends MoCEntityTameableAnimal {
         return super.getCreatureAttribute();
     }
 
-    @Override
-    protected boolean canBeTrappedInNet() 
-    {
-        return getIsTamed() && !isAmuletHorse();
-    }
     public void setImmuneToFire(boolean value)
     {
         this.isImmuneToFire = value;

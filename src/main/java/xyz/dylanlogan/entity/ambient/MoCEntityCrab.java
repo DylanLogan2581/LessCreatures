@@ -8,11 +8,11 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAmbient;
+import xyz.dylanlogan.entity.MoCEntityAmbient;
 import xyz.dylanlogan.network.MoCMessageHandler;
 import xyz.dylanlogan.network.message.MoCMessageAnimation;
 
-public class MoCEntityCrab extends MoCEntityTameableAmbient
+public class MoCEntityCrab extends MoCEntityAmbient
 
 {
     public MoCEntityCrab(World world)
@@ -136,12 +136,6 @@ public class MoCEntityCrab extends MoCEntityTameableAmbient
     {
         return EnumCreatureAttribute.ARTHROPOD;
     }
-    
-    protected boolean canBeTrappedInNet() 
-    {
-        return true;
-    }
-    
     @Override
     public boolean renderName()
     {

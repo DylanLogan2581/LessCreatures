@@ -26,13 +26,13 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 import xyz.dylanlogan.entity.item.MoCEntityPlatform;
 import xyz.dylanlogan.inventory.MoCAnimalChest;
 import xyz.dylanlogan.network.MoCMessageHandler;
 import xyz.dylanlogan.network.message.MoCMessageAnimation;
 
-public class MoCEntityElephant extends MoCEntityTameableAnimal {
+public class MoCEntityElephant extends MoCEntityAnimal {
 
     public int sprintCounter;
     public int sitCounter;
@@ -247,10 +247,6 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
             if (getIsTamed() && (riddenByEntity == null) && getArmorType() >= 1 && rand.nextInt(20) == 0)
             {
                 EntityPlayer ep = worldObj.getClosestPlayerToEntity(this, 3D);
-                if (ep != null && (!MoCreatures.proxy.enableOwnership || ep.getCommandSenderName().equals(getOwnerName())) && ep.isSneaking())
-                {
-                    sit();
-                }
             }
 
             if (MoCreatures.proxy.elephantBulldozer && getIsTamed() && (riddenByEntity != null) && (getTusks() > 0) )
@@ -391,7 +387,7 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
             this.setHealth(getMaxHealth());
             if (MoCreatures.isServer() && !getIsAdult() && !getIsTamed() && temper >= 10)
             {
-                MoCTools.tameWithName(entityplayer, this);
+                
             }
             return true;
         }
@@ -405,11 +401,6 @@ public class MoCEntityElephant extends MoCEntityTameableAnimal {
             MoCTools.playCustomSound(this, "eating", worldObj);
             temper += 1;
             this.setHealth(getMaxHealth());
-            if (MoCreatures.isServer() && !getIsAdult() && !getIsTamed() && temper >= 10)
-            {
-                setTamed(true);
-                MoCTools.tameWithName((EntityPlayerMP) entityplayer, this);
-            }
             return true;
         }
         

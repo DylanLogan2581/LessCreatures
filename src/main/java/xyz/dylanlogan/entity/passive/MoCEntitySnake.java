@@ -20,7 +20,7 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 import xyz.dylanlogan.network.MoCMessageHandler;
 import xyz.dylanlogan.network.message.MoCMessageAnimation;
 
@@ -35,7 +35,7 @@ import xyz.dylanlogan.network.message.MoCMessageAnimation;
  * 
  */
 
-public class MoCEntitySnake extends MoCEntityTameableAnimal {
+public class MoCEntitySnake extends MoCEntityAnimal {
 
     private float fTongue;
     private float fMouth;

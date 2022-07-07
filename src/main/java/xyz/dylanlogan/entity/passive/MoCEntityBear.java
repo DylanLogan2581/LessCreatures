@@ -18,9 +18,9 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 
-public class MoCEntityBear extends MoCEntityTameableAnimal {
+public class MoCEntityBear extends MoCEntityAnimal {
 
     public int mouthCounter;
     private int attackCounter;
@@ -386,7 +386,7 @@ public class MoCEntityBear extends MoCEntityTameableAnimal {
 
             if (MoCreatures.isServer())
             {
-                MoCTools.tameWithName(entityplayer, this);
+                
             }
 
             this.setHealth(getMaxHealth());

@@ -57,21 +57,12 @@ public class MoCItemWhip extends MoCItem {
                 if (entity instanceof MoCEntityAnimal)
                 {
                     MoCEntityAnimal animal = (MoCEntityAnimal) entity;
-                    if (MoCreatures.proxy.enableOwnership && animal.getOwnerName() != null && !animal.getOwnerName().equals("") && !entityplayer.getCommandSenderName().equals(animal.getOwnerName()) && !MoCTools.isThisPlayerAnOP(entityplayer)) 
-                    { 
-                       continue;
-                    }
                 }
                 
                 if (entity instanceof MoCEntityBigCat)
                 {
                     MoCEntityBigCat entitybigcat = (MoCEntityBigCat) entity;
-                    if (entitybigcat.getIsTamed())
-                    {
-                        entitybigcat.setSitting(!entitybigcat.getIsSitting());
-                        i1++;
-                    }
-                    else if ((world.difficultySetting.getDifficultyId() > 0) && entitybigcat.getIsAdult())
+                    if ((world.difficultySetting.getDifficultyId() > 0) && entitybigcat.getIsAdult())
                     {
                         entitybigcat.setTarget(entityplayer);
                     }
@@ -79,26 +70,6 @@ public class MoCItemWhip extends MoCItem {
                 if (entity instanceof MoCEntityHorse)
                 {
                     MoCEntityHorse entityhorse = (MoCEntityHorse) entity;
-                    if (entityhorse.getIsTamed())
-                    {
-                        if (entityhorse.riddenByEntity == null)
-                        {
-                            entityhorse.setEating(!entityhorse.getEating());
-                        }
-                        else if (entityhorse.isNightmare())
-                        {
-                            entityhorse.setNightmareInt(250);
-                        }
-                        else if (entityhorse.sprintCounter == 0)
-                        {
-                            entityhorse.sprintCounter = 1;
-                        }
-                        //TODO reactivate the right one prior to release
-                        else
-                        {
-                            entityhorse.setEating(!entityhorse.getEating());
-                        }
-                    }
                 }
                 
                 if ((entity instanceof MoCEntityKitty))
@@ -113,10 +84,6 @@ public class MoCItemWhip extends MoCItem {
                 if ((entity instanceof MoCEntityWyvern))
                 {
                     MoCEntityWyvern entitywyvern = (MoCEntityWyvern) entity;
-                    if (entitywyvern.getIsTamed() && !entitywyvern.isOnAir())
-                    {
-                        entitywyvern.setSitting(!entitywyvern.getIsSitting());
-                    }
                 }
                 
                 if (entity instanceof MoCEntityOstrich)
@@ -130,10 +97,6 @@ public class MoCItemWhip extends MoCItem {
                     }
 
                     //toggles hiding of tamed ostriches
-                    if (entityostrich.getIsTamed() && entityostrich.riddenByEntity == null)
-                    {
-                        entityostrich.setHiding(!entityostrich.getHiding());
-                    }
                 }
                 if (entity instanceof MoCEntityElephant)
                 {

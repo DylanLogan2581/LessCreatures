@@ -38,9 +38,9 @@ public class MoCRenderKitty extends RenderBiped {
     {
         MoCEntityKitty entitykitty = (MoCEntityKitty) entityliving;
         super.doRender(entitykitty, d, d1, d2, f, f1);
-        boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entitykitty.getName()).isEmpty();
-        boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
-        boolean flag2 = MoCreatures.proxy.getDisplayPetIcons();
+        boolean flag = false;
+        boolean flag1 = false;
+        boolean flag2 = false;
         if (entitykitty.renderName())
         {
             float f2 = 1.6F;

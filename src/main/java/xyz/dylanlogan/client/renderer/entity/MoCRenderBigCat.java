@@ -60,9 +60,9 @@ public class MoCRenderBigCat extends RenderLiving {
         MoCEntityBigCat entitybigcat = (MoCEntityBigCat) entityliving;
 
         super.doRender(entitybigcat, d, d1, d2, f, f1);
-        boolean flag = MoCreatures.proxy.getDisplayPetName() && !(entitybigcat.getName()).isEmpty();
-        boolean flag1 = MoCreatures.proxy.getDisplayPetHealth();
-        boolean flag2 = MoCreatures.proxy.getDisplayPetIcons();
+        boolean flag = false;
+        boolean flag1 = false;
+        boolean flag2 = false;
         if (entitybigcat.renderName())
         {
             float f2 = 1.6F;

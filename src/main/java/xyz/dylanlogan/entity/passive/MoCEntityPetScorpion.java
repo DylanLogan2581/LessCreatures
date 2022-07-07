@@ -19,13 +19,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 import xyz.dylanlogan.entity.item.MoCEntityEgg;
 import xyz.dylanlogan.entity.monster.MoCEntityScorpion;
 import xyz.dylanlogan.network.MoCMessageHandler;
 import xyz.dylanlogan.network.message.MoCMessageAnimation;
 
-public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
+public class MoCEntityPetScorpion extends MoCEntityAnimal {
     public static final String scorpionNames[] = { "Dirt", "Cave", "Nether", "Frost", "Undead" };
     private boolean isPoisoning;
     private int poisontimer;
@@ -496,7 +496,7 @@ public class MoCEntityPetScorpion extends MoCEntityTameableAnimal {
 
             if (MoCreatures.isServer() && !getIsTamed())
             {
-                MoCTools.tameWithName(entityplayer, this);
+                
             }
         }
         else if (this.ridingEntity != null && getIsPicked())

@@ -16,9 +16,9 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 
-public class MoCEntityFox extends MoCEntityTameableAnimal {
+public class MoCEntityFox extends MoCEntityAnimal {
     protected double attackRange;
     protected int force;
 
@@ -111,7 +111,7 @@ public class MoCEntityFox extends MoCEntityTameableAnimal {
 
             if (MoCreatures.isServer())
             {
-                MoCTools.tameWithName(entityplayer, this);
+                
             }
             this.setHealth(getMaxHealth());
 

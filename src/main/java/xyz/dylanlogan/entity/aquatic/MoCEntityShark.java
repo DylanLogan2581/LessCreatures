@@ -17,11 +17,11 @@ import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
 import xyz.dylanlogan.entity.MoCEntityAquatic;
-import xyz.dylanlogan.entity.MoCEntityTameableAquatic;
+import xyz.dylanlogan.entity.MoCEntityAquatic;
 import xyz.dylanlogan.entity.item.MoCEntityEgg;
 import xyz.dylanlogan.entity.passive.MoCEntityHorse;
 
-public class MoCEntityShark extends MoCEntityTameableAquatic {
+public class MoCEntityShark extends MoCEntityAquatic {
     public MoCEntityShark(World world)
     {
         super(world);

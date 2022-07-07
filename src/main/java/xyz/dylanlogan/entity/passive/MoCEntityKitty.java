@@ -27,13 +27,13 @@ import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
 import xyz.dylanlogan.entity.IMoCEntity;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 import xyz.dylanlogan.entity.item.MoCEntityKittyBed;
 import xyz.dylanlogan.entity.item.MoCEntityLitterBox;
 import xyz.dylanlogan.network.MoCMessageHandler;
 import xyz.dylanlogan.network.message.MoCMessageAnimation;
 
-public class MoCEntityKitty extends MoCEntityTameableAnimal {
+public class MoCEntityKitty extends MoCEntityAnimal {
 
     private int kittytimer;
     private int madtimer;
@@ -543,17 +543,7 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         {
             if (MoCreatures.isServer())
             {
-                MoCTools.tameWithName(entityplayer, this);
-            }
-            if (getIsTamed() && --itemstack.stackSize == 0)
-            {
-                entityplayer.inventory.setInventorySlotContents(entityplayer.inventory.currentItem, null);
-            }
-            if (getIsTamed())
-            {
-                changeKittyState(3);
-                this.setHealth(getMaxHealth());
-                return true;
+                
             }
             return false;
         }
@@ -600,7 +590,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
         {
             if (MoCreatures.isServer())
             {
-                MoCTools.tameWithName((EntityPlayerMP) entityplayer, this);
             }
 
             return true;
@@ -1479,10 +1468,6 @@ public class MoCEntityKitty extends MoCEntityTameableAnimal {
     {
         if (MoCreatures.isServer())
         {
-            if (getIsTamed())
-            {
-                MoCTools.dropCustomItem(this, this.worldObj, new ItemStack(MoCreatures.medallion, 1));
-            }
         }
         super.onDeath(damagesource);
     }

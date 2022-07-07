@@ -15,7 +15,6 @@ import xyz.dylanlogan.network.message.MoCMessageHeart;
 import xyz.dylanlogan.network.message.MoCMessageInstaSpawn;
 import xyz.dylanlogan.network.message.MoCMessageShuffle;
 import xyz.dylanlogan.network.message.MoCMessageTwoBytes;
-import xyz.dylanlogan.network.message.MoCMessageUpdatePetName;
 import xyz.dylanlogan.network.message.MoCMessageVanish;
 
 public class MoCMessageHandler
@@ -33,7 +32,6 @@ public class MoCMessageHandler
         INSTANCE.registerMessage(MoCMessageHealth.class, MoCMessageHealth.class, 6, Side.CLIENT);
         INSTANCE.registerMessage(MoCMessageHeart.class, MoCMessageHeart.class, 7, Side.CLIENT);
         INSTANCE.registerMessage(MoCMessageInstaSpawn.class, MoCMessageInstaSpawn.class, 8, Side.SERVER);
-        INSTANCE.registerMessage(MoCMessageUpdatePetName.class, MoCMessageUpdatePetName.class, 10, Side.SERVER);
         INSTANCE.registerMessage(MoCMessageShuffle.class, MoCMessageShuffle.class, 11, Side.CLIENT);
         INSTANCE.registerMessage(MoCMessageTwoBytes.class, MoCMessageTwoBytes.class, 12, Side.CLIENT);
         INSTANCE.registerMessage(MoCMessageVanish.class, MoCMessageVanish.class, 13, Side.CLIENT);

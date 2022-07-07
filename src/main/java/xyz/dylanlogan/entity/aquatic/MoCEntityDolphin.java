@@ -18,11 +18,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAquatic;
+import xyz.dylanlogan.entity.MoCEntityAquatic;
 import xyz.dylanlogan.network.MoCMessageHandler;
 import xyz.dylanlogan.network.message.MoCMessageHeart;
 
-public class MoCEntityDolphin extends MoCEntityTameableAquatic {
+public class MoCEntityDolphin extends MoCEntityAquatic {
 
     public int gestationtime;
 
@@ -473,11 +473,6 @@ public class MoCEntityDolphin extends MoCEntityTameableAquatic {
                     babydolphin.setAdult(false);
                     babydolphin.setOwner(this.getOwnerName());
                     babydolphin.setTamed(true);
-                    EntityPlayer entityplayer = worldObj.getPlayerEntityByName(this.getOwnerName());
-                    if (entityplayer != null)
-                    {
-                        MoCTools.tameWithName(entityplayer, babydolphin);
-                    }
                     babydolphin.setTypeInt(l);
                     break;
                 }

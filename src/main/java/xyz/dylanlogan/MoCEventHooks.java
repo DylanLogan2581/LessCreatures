@@ -9,7 +9,6 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -23,8 +22,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import xyz.dylanlogan.entity.IMoCTameable;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
 import xyz.dylanlogan.utils.MoCLog;
 
 public class MoCEventHooks {
@@ -44,15 +41,6 @@ public class MoCEventHooks {
     {
         if (DimensionManager.getWorld(0) != null && !MoCreatures.proxy.worldInitDone) // if overworld has loaded, use its mapstorage
         {
-            MoCPetMapData data = (MoCPetMapData)DimensionManager.getWorld(0).mapStorage.loadData(MoCPetMapData.class, "mocreatures");
-            if (data == null)
-            {
-                data = new MoCPetMapData("mocreatures");
-            }
-
-            DimensionManager.getWorld(0).mapStorage.setData("mocreatures", data);
-            DimensionManager.getWorld(0).mapStorage.saveAllData();
-            MoCreatures.instance.mapData = data;
             MoCreatures.proxy.worldInitDone = true;
         }
         // make sure doMobSpawning is on if CMS is not installed
@@ -65,22 +53,6 @@ public class MoCEventHooks {
     @SubscribeEvent
     public void onLivingDeathEvent(LivingDeathEvent event) 
     {
-        if (MoCreatures.isServer())
-        {
-            if (IMoCTameable.class.isAssignableFrom(event.entityLiving.getClass())) 
-            {
-                IMoCTameable mocEntity = (IMoCTameable)event.entityLiving;
-                if (mocEntity.getIsTamed() && mocEntity.getPetHealth() > 0 && !mocEntity.isRiderDisconnecting())
-                {
-                    return;
-                }
-
-                if (mocEntity.getOwnerPetId() != -1) // required since getInteger will always return 0 if no key is found
-                {
-                    MoCreatures.instance.mapData.removeOwnerPet(mocEntity, mocEntity.getOwnerPetId());
-                }
-            }
-        }
     }
 
     // used for Despawner
@@ -94,14 +66,6 @@ public class MoCEventHooks {
             if ((IMob.class.isAssignableFrom(event.entityLiving.getClass()) || IRangedAttackMob.class.isAssignableFrom(event.entityLiving.getClass())) || event.entityLiving.isCreatureType(EnumCreatureType.monster, false))
             {
                 return;
-            }
-            // Tameable
-            if (event.entityLiving instanceof EntityTameable)
-            {
-                if (((EntityTameable)event.entityLiving).isTamed())
-                {
-                    return;
-                }
             }
             // Farm animals
             if (event.entityLiving instanceof EntitySheep || event.entityLiving instanceof EntityPig || event.entityLiving instanceof EntityCow || event.entityLiving instanceof EntityChicken)
@@ -117,14 +81,6 @@ public class MoCEventHooks {
             event.entityLiving.writeToNBT(nbt);
             if (nbt != null)
             {
-                if (nbt.hasKey("Owner") && !nbt.getString("Owner").equals(""))
-                {
-                    return; // ignore
-                }
-                if (nbt.hasKey("Tamed") && nbt.getBoolean("Tamed") == true)
-                {
-                    return; // ignore
-                }
             }
             // Deny Rest
             if (event.entityLiving.getAge() > 600)

@@ -13,9 +13,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 
-public class MoCEntityCrocodile extends MoCEntityTameableAnimal {
+public class MoCEntityCrocodile extends MoCEntityAnimal {
     // TODO
     // fix floating so it moves faster if it's deep and caughts prey underneath
 

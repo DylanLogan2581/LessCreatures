@@ -19,13 +19,13 @@ import net.minecraft.world.World;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
 import xyz.dylanlogan.entity.MoCEntityAquatic;
-import xyz.dylanlogan.entity.MoCEntityTameableAquatic;
+import xyz.dylanlogan.entity.MoCEntityAquatic;
 import xyz.dylanlogan.entity.item.MoCEntityEgg;
 import xyz.dylanlogan.entity.passive.MoCEntityHorse;
 import xyz.dylanlogan.network.MoCMessageHandler;
 import xyz.dylanlogan.network.message.MoCMessageHeart;
 
-public class MoCEntityFishy extends MoCEntityTameableAquatic {
+public class MoCEntityFishy extends MoCEntityAquatic {
 
     public int gestationtime;
     private boolean hasEaten;
@@ -230,13 +230,6 @@ public class MoCEntityFishy extends MoCEntityTameableAquatic {
                     entityfishy.setHasEaten(false);
                     gestationtime = 0;
                     entityfishy.gestationtime = 0;
-
-                    EntityPlayer entityplayer = worldObj.getClosestPlayerToEntity(this, 24D);
-                    if (entityplayer != null)
-                    {
-                        MoCTools.tameWithName(entityplayer, entityfishy1);
-                    }
-
                     entityfishy1.setEdad(20);
                     entityfishy1.setAdult(false);
                     entityfishy1.setTypeInt(getType());

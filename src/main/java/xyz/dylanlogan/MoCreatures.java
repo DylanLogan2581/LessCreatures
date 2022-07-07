@@ -124,11 +124,9 @@ import xyz.dylanlogan.item.MoCItemEgg;
 import xyz.dylanlogan.item.MoCItemFishBowl;
 import xyz.dylanlogan.item.MoCItemFood;
 import xyz.dylanlogan.item.MoCItemHayStack;
-import xyz.dylanlogan.item.MoCItemHorseAmulet;
 import xyz.dylanlogan.item.MoCItemHorseSaddle;
 import xyz.dylanlogan.item.MoCItemKittyBed;
 import xyz.dylanlogan.item.MoCItemLitterBox;
-import xyz.dylanlogan.item.MoCItemPetAmulet;
 import xyz.dylanlogan.item.MoCItemRecord;
 import xyz.dylanlogan.item.MoCItemSugarLump;
 import xyz.dylanlogan.item.MoCItemTurtleSoup;
@@ -146,7 +144,6 @@ public class MoCreatures {
     @SidedProxy(clientSide = "xyz.dylanlogan.client.MoCClientProxy", serverSide = "drzhark.mocreatures.MoCProxy")
     public static MoCProxy proxy;
     public static final CreativeTabs tabMoC = new MoCCreativeTabs(CreativeTabs.creativeTabArray.length, "MoCreaturesTab");
-    public MoCPetMapData mapData;
     public static boolean isCustomSpawnerLoaded = false;
     public static GameProfile MOCFAKEPLAYER = new GameProfile(UUID.fromString("6E379B45-1111-2222-3333-2FE1A88BCD66"), "[MoCreatures]");
 
@@ -230,14 +227,6 @@ public class MoCreatures {
     public static Item key;
     public static Item essencedarkness;
     public static Item essencefire;
-    public static Item amuletbone;
-    public static Item amuletbonefull;
-    public static Item amuletghost;
-    public static Item amuletghostfull;
-    public static Item amuletfairy;
-    public static Item amuletfairyfull;
-    public static Item amuletpegasus;
-    public static Item amuletpegasusfull;
 
     public static Item essenceundead;
     public static Item essencelight;
@@ -317,7 +306,6 @@ public class MoCreatures {
     public static Item crabcooked;
 
     public static Item fishnet;
-    public static Item petamulet;
 
     public static MoCPlayerTracker tracker;
     public static Map<String, MoCEntityData> mocEntityMap = new TreeMap<String, MoCEntityData>(String.CASE_INSENSITIVE_ORDER);
@@ -639,14 +627,6 @@ public class MoCreatures {
         key = new MoCItem("key");
         essencedarkness = new MoCItem("essencedarkness");
         essencefire = new MoCItem("essencefire");
-        amuletbone = new MoCItemHorseAmulet("amuletbone");
-        amuletbonefull = new MoCItemHorseAmulet("amuletbonefull");
-        amuletghost = new MoCItemHorseAmulet("amuletghost");
-        amuletghostfull = new MoCItemHorseAmulet("amuletghostfull");
-        amuletfairy = new MoCItemHorseAmulet("amuletfairy");
-        amuletfairyfull = new MoCItemHorseAmulet("amuletfairyfull");
-        amuletpegasus = new MoCItemHorseAmulet("amuletpegasus");
-        amuletpegasusfull = new MoCItemHorseAmulet("amuletpegasusfull");
 
         essenceundead = new MoCItem("essenceundead");
         essencelight = new MoCItem("essencelight");
@@ -663,7 +643,6 @@ public class MoCreatures {
         ostrichcooked = new MoCItemFood("ostrichcooked", 6, 0.6F, false);
         unicornhorn = new MoCItem("unicornhorn");
 
-        fishnet = new MoCItemPetAmulet("fishnet");
         horsearmorcrystal = new MoCItem("horsearmorcrystal");
 
         rawTurkey = new MoCItemFood("turkeyraw", 3, 0.3F, false).setPotionEffect(Potion.hunger.id, 30, 0, 0.8F);
@@ -731,7 +710,6 @@ public class MoCreatures {
         staffPortal = new ItemStaffPortal("staffportal");
         staffTeleport = new ItemStaffTeleport("staffteleport");
         scrollOfOwner = new MoCItem("scrollofowner");
-        petamulet = new MoCItemPetAmulet("petamulet", 1);
 
         proxy.mocSettingsConfig.save();
     }
@@ -865,18 +843,6 @@ public class MoCreatures {
         GameRegistry.addRecipe(new ItemStack(bootsFur, 1), new Object[] { "X X", "X X", Character.valueOf('X'), fur });
 
         GameRegistry.addRecipe(new ItemStack(key, 1), new Object[] { "  #", " # ", "X  ", Character.valueOf('#'), Items.stick, Character.valueOf('X'), Items.iron_ingot, });
-
-        GameRegistry.addRecipe(new ItemStack(petamulet, 1), new Object[] { "X X", " Z ", "X X", Character.valueOf('X'), Items.gold_nugget, Character.valueOf('Z'), Items.diamond });
-
-        GameRegistry.addRecipe(new ItemStack(amuletbone, 1), new Object[] { "#X#", "XZX", "#X#", Character.valueOf('#'), Items.bone, Character.valueOf('X'), Items.gold_nugget, Character.valueOf('Z'), Items.ender_pearl });
-
-        GameRegistry.addRecipe(new ItemStack(amuletghost, 1), new Object[] { "#X#", "XZX", "#X#", Character.valueOf('#'), Items.bone, Character.valueOf('X'), Items.gold_nugget, Character.valueOf('Z'), Items.ghast_tear });
-
-        GameRegistry.addRecipe(new ItemStack(amuletfairy, 1), new Object[] { "#X#", "XZX", "#X#", Character.valueOf('#'), Blocks.fire, Character.valueOf('X'), Items.gold_nugget, Character.valueOf('Z'), unicornhorn });
-
-        GameRegistry.addRecipe(new ItemStack(amuletfairy, 1), new Object[] { "#X#", "XZX", "#X#", Character.valueOf('#'), Blocks.fire, Character.valueOf('X'), Items.gold_nugget, Character.valueOf('Z'), essencelight });
-
-        GameRegistry.addRecipe(new ItemStack(amuletpegasus, 1), new Object[] { "#X#", "XZX", "#X#", Character.valueOf('#'), Blocks.fire, Character.valueOf('X'), Items.gold_nugget, Character.valueOf('Z'), Items.diamond });
 
         GameRegistry.addRecipe(new ItemStack(sharksword, 1), new Object[] { "#X#", "#X#", " X ", Character.valueOf('#'), sharkteeth, Character.valueOf('X'), Items.stick, });
 

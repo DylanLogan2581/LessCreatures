@@ -487,21 +487,6 @@ public class MoCClientProxy extends MoCProxy {
         return particleFX;
     }
 
-    public boolean getDisplayPetName()
-    {
-        return displayPetName;
-    }
-
-    public boolean getDisplayPetIcons()
-    {
-        return displayPetIcons;
-    }
-
-    public boolean getDisplayPetHealth()
-    {
-        return displayPetHealth;
-    }
-
     @Override
     public boolean getAnimateTextures()
     {

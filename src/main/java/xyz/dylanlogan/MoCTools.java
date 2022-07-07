@@ -59,7 +59,6 @@ import xyz.dylanlogan.client.MoCClientProxy;
 import xyz.dylanlogan.entity.IMoCEntity;
 import xyz.dylanlogan.entity.IMoCTameable;
 import xyz.dylanlogan.entity.MoCEntityAnimal;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
 import xyz.dylanlogan.entity.ambient.MoCEntityMaggot;
 import xyz.dylanlogan.entity.monster.MoCEntityOgre;
 import xyz.dylanlogan.entity.passive.MoCEntityHorse;
@@ -1326,35 +1325,6 @@ public class MoCTools {
         {
             return false;
         }
-
-        if (MoCreatures.proxy.enableOwnership) 
-        {
-            if (storedCreature == null)
-            {
-                ep.addChatMessage(new ChatComponentTranslation(EnumChatFormatting.RED + "ERROR:" + EnumChatFormatting.WHITE + "The stored creature is NULL and could not be created. Report to admin."));
-                return false;
-            }
-            int max = 0;
-            max = MoCreatures.proxy.maxTamed;
-            // only check count for new pets as owners may be changing the name
-            if (!MoCreatures.instance.mapData.isExistingPet(ep.getCommandSenderName(), storedCreature))
-            {
-                int count = MoCTools.numberTamedByPlayer(ep);
-                if (isThisPlayerAnOP(ep)) 
-                {
-                    max = MoCreatures.proxy.maxOPTamed;
-                }
-                if (count >= max) 
-                {
-                    String message = "\2474" + ep.getCommandSenderName() + " can not tame more creatures, limit of " + max + " reached";
-                    ep.addChatMessage(new ChatComponentTranslation(message));
-                    return false;
-                }
-            }
-        }
-
-        storedCreature.setOwner(ep.getCommandSenderName()); // ALWAYS SET OWNER. Required for our new pet save system.
-        storedCreature.setTamed(true);
         return true;
     }
 
@@ -1366,13 +1336,6 @@ public class MoCTools {
      */
     public static int numberTamedByPlayer(EntityPlayer ep)
     {
-        if (MoCreatures.instance.mapData != null)
-        {
-            if (MoCreatures.instance.mapData.getPetData(ep.getCommandSenderName()) != null)
-            {
-                return MoCreatures.instance.mapData.getPetData(ep.getCommandSenderName()).getTamedList().tagCount();
-            }
-        }
         return 0;
     }
 
@@ -1454,173 +1417,6 @@ public class MoCTools {
         }
     }
 
-    /**
-     * Drops an amulet with the stored information of the entity passed
-     * @param entity
-     */
-    public static void dropHorseAmulet(MoCEntityTameableAnimal entity)
-    {
-        if (MoCreatures.isServer())
-        {
-            ItemStack stack = getProperAmulet(entity);
-            if (stack == null) 
-            {
-                return;
-            }
-            if( stack.stackTagCompound == null )
-            {
-                stack.setTagCompound(new NBTTagCompound());
-            }
-            NBTTagCompound nbtt = stack.stackTagCompound;
-
-            try
-            {
-                nbtt.setInteger("SpawnClass", 21); 
-                nbtt.setFloat("Health", entity.getHealth());
-                nbtt.setInteger("Edad", entity.getEdad());
-                nbtt.setString("Name", entity.getName());
-                nbtt.setBoolean("Rideable", entity.getIsRideable());
-                nbtt.setByte("Armor", entity.getArmorType());
-                nbtt.setInteger("CreatureType", entity.getType());
-                nbtt.setBoolean("Adult", entity.getIsAdult());          
-                nbtt.setString("OwnerName", entity.getOwnerName());
-                nbtt.setInteger("PetId", entity.getOwnerPetId());
-            }
-            catch (Exception e)
-            {
-            }
-            
-            EntityPlayer epOwner = entity.worldObj.getPlayerEntityByName(entity.getOwnerName());
-
-            if (epOwner != null && epOwner.inventory.getFirstEmptyStack() != -1) // don't attempt to set if player inventory is full
-            {
-                epOwner.inventory.addItemStackToInventory(stack);
-            }
-            else
-            {
-                EntityItem entityitem = new EntityItem(entity.worldObj, entity.posX, entity.posY, entity.posZ, stack);
-                entityitem.delayBeforeCanPickup = 20;
-                entity.worldObj.spawnEntityInWorld(entityitem);
-            }
-        }
-    }
-
-    /**
-     * Drops a new amulet/fishnet with the stored information of the entity
-     */
-    public static void dropAmulet(IMoCTameable entity, int amuletType)
-    {
-        if (MoCreatures.isServer())
-        {
-            ItemStack stack = new ItemStack(MoCreatures.fishnet, 1, 1); 
-            if (amuletType == 2)
-            {
-               stack = new ItemStack(MoCreatures.petamulet, 1, 1);
-            }
-
-            if( stack.stackTagCompound == null )
-            {
-                stack.setTagCompound(new NBTTagCompound());
-            }
-            NBTTagCompound nbtt = stack.stackTagCompound;
-
-            try
-            {
-                String petClass = entity.getClass().getSimpleName().replace("MoCEntity", "");
-                if (petClass.equalsIgnoreCase("Horse"))
-                {
-                    petClass = "WildHorse";
-                }
-                else if (petClass.equalsIgnoreCase("Komodo"))
-                {
-                    petClass = "KomodoDragon";
-                }
-                nbtt.setString("SpawnClass", petClass);
-                nbtt.setFloat("Health", ((EntityLiving)entity).getHealth());
-                nbtt.setInteger("Edad", entity.getEdad());
-                nbtt.setString("Name", entity.getName());
-                nbtt.setInteger("CreatureType", entity.getType());
-                nbtt.setString("OwnerName", entity.getOwnerName());
-                nbtt.setBoolean("Adult", entity.getIsAdult());
-                nbtt.setInteger("PetId", entity.getOwnerPetId());
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-
-            EntityPlayer epOwner = ((EntityLivingBase)entity).worldObj.getPlayerEntityByName(entity.getOwnerName());
-            if (epOwner != null)
-            {
-                epOwner.inventory.addItemStackToInventory(stack);
-            }
-            else
-            {
-                EntityItem entityitem = new EntityItem(((EntityLivingBase)entity).worldObj, ((EntityLivingBase)entity).posX, ((EntityLivingBase)entity).posY, ((EntityLivingBase)entity).posZ, stack);
-                entityitem.delayBeforeCanPickup = 20;
-                ((EntityLivingBase)entity).worldObj.spawnEntityInWorld(entityitem);
-            }
-        }
-    }
-
-    /**
-     * Returns the right full amulet based on the MoCEntityAnimal passed
-     * @param entity
-     * @return
-     */
-    public static ItemStack getProperAmulet(MoCEntityAnimal entity)
-    {
-        if (entity instanceof MoCEntityHorse)
-        {
-            if (entity.getType() == 26 || entity.getType() == 27 || entity.getType() == 28)
-            {
-                return new ItemStack(MoCreatures.amuletbonefull, 1, entity.getType());
-            }
-            if (entity.getType() > 47 && entity.getType() < 60)
-            {
-                return new ItemStack(MoCreatures.amuletfairyfull, 1, entity.getType());
-            }
-            if (entity.getType() == 39 || entity.getType() == 40)
-            {
-                return new ItemStack(MoCreatures.amuletpegasusfull, 1, entity.getType());
-            }
-            if (entity.getType() == 21 || entity.getType() == 22)
-            {
-               return new ItemStack(MoCreatures.amuletghostfull, 1, entity.getType());
-            }
-        }
-        return null;
-    }
-    
-    /**
-     * Returns the right full empty based on the MoCEntityAnimal passed. Used when the amulet empties its contents
-     * @param entity
-     * @return
-     */
-    public static ItemStack getProperEmptyAmulet(MoCEntityAnimal entity)
-    {
-        if (entity instanceof MoCEntityHorse)
-        {
-            if (entity.getType() == 26 || entity.getType() == 27 || entity.getType() == 28)
-            {
-                return new ItemStack(MoCreatures.amuletbone, 1, entity.getType());
-            }
-            if (entity.getType() > 49 && entity.getType() < 60)
-            {
-                return new ItemStack(MoCreatures.amuletfairy, 1, entity.getType());
-            }
-            if (entity.getType() == 39 || entity.getType() == 40)
-            {
-                return new ItemStack(MoCreatures.amuletpegasus, 1, entity.getType());
-            }
-            if (entity.getType() == 21 || entity.getType() == 22)
-            {
-               return new ItemStack(MoCreatures.amuletghost, 1, entity.getType());
-            }
-        }
-        return null;
-    }
-    
     public static int countPlayersInDimension(WorldServer worldObj, int dimension)
     {
         int playersInDimension = 0;

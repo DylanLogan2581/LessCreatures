@@ -29,11 +29,11 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import xyz.dylanlogan.MoCTools;
 import xyz.dylanlogan.MoCreatures;
 import xyz.dylanlogan.entity.IMoCEntity;
-import xyz.dylanlogan.entity.MoCEntityTameableAnimal;
+import xyz.dylanlogan.entity.MoCEntityAnimal;
 import xyz.dylanlogan.entity.item.MoCEntityKittyBed;
 import xyz.dylanlogan.entity.item.MoCEntityLitterBox;
 
-public class MoCEntityBigCat extends MoCEntityTameableAnimal {
+public class MoCEntityBigCat extends MoCEntityAnimal {
 
     public MoCEntityBigCat(World world)
     {
@@ -625,7 +625,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
         {
             if (MoCreatures.isServer())
             {
-                MoCTools.tameWithName(entityplayer, this);
+                
             }
             if (getIsTamed() && --itemstack.stackSize == 0)
             {
@@ -743,7 +743,7 @@ public class MoCEntityBigCat extends MoCEntityTameableAnimal {
     @Override
     public boolean renderName()
     {
-        return !getName().isEmpty() && getDisplayName() && MoCreatures.proxy.getDisplayPetName();
+        return false;
     }
 
     @Override
