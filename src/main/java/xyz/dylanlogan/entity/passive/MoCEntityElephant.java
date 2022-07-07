@@ -50,7 +50,7 @@ public class MoCEntityElephant extends MoCEntityAnimal {
     {
         super(world);
         setAdult(true);
-        setTamed(false);
+        setTamed(true);
         setEdad(50);
         setSize(1.1F, 3F);
         //health = 40;
@@ -244,12 +244,12 @@ public class MoCEntityElephant extends MoCEntityAnimal {
                 MoCTools.buckleMobsNotPlayers(this, 3D, worldObj);
             }
             
-            if (getIsTamed() && (riddenByEntity == null) && getArmorType() >= 1 && rand.nextInt(20) == 0)
+            if ((riddenByEntity == null) && getArmorType() >= 1 && rand.nextInt(20) == 0)
             {
                 EntityPlayer ep = worldObj.getClosestPlayerToEntity(this, 3D);
             }
 
-            if (MoCreatures.proxy.elephantBulldozer && getIsTamed() && (riddenByEntity != null) && (getTusks() > 0) )
+            if (MoCreatures.proxy.elephantBulldozer && (riddenByEntity != null) && (getTusks() > 0) )
             {
                    int height = 2;
                     if (getType() == 3)
@@ -486,7 +486,7 @@ public class MoCEntityElephant extends MoCEntityAnimal {
         }
 
         //giving a platform to a ? mammoth with harness will attach the platform
-        if ((itemstack != null) && getIsTamed() && getIsAdult() && getArmorType() == 1 && getType() == 4 && itemstack.getItem() == MoCreatures.mammothPlatform)
+        if ((itemstack != null) && getIsAdult() && getArmorType() == 1 && getType() == 4 && itemstack.getItem() == MoCreatures.mammothPlatform)
         {
             if (--itemstack.stackSize == 0)
             {
@@ -497,7 +497,7 @@ public class MoCEntityElephant extends MoCEntityAnimal {
             return true;
         }
 
-        if ((itemstack != null) && getIsTamed() && getIsAdult() && itemstack.getItem() == MoCreatures.tusksWood)
+        if ((itemstack != null) && getIsAdult() && itemstack.getItem() == MoCreatures.tusksWood)
         {
             if (--itemstack.stackSize == 0)
             {
@@ -510,7 +510,7 @@ public class MoCEntityElephant extends MoCEntityAnimal {
             return true;
         }
 
-        if ((itemstack != null) && getIsTamed() && getIsAdult() && itemstack.getItem() == MoCreatures.tusksIron)
+        if ((itemstack != null) && getIsAdult() && itemstack.getItem() == MoCreatures.tusksIron)
         {
             if (--itemstack.stackSize == 0)
             {
@@ -523,7 +523,7 @@ public class MoCEntityElephant extends MoCEntityAnimal {
             return true;
         }
 
-        if ((itemstack != null) && getIsTamed() && getIsAdult() && itemstack.getItem() == MoCreatures.tusksDiamond)
+        if ((itemstack != null) && getIsAdult() && itemstack.getItem() == MoCreatures.tusksDiamond)
         {
             if (--itemstack.stackSize == 0)
             {
@@ -629,7 +629,7 @@ public class MoCEntityElephant extends MoCEntityAnimal {
             return true; 
         }
         
-        if (getIsTamed() && getIsAdult() && getArmorType() >= 1 && sitCounter != 0)
+        if (getIsAdult() && getArmorType() >= 1)// && sitCounter != 0)
         {
             entityplayer.rotationYaw = rotationYaw;
             entityplayer.rotationPitch = rotationPitch;
@@ -695,13 +695,13 @@ public class MoCEntityElephant extends MoCEntityAnimal {
     @Override
     public boolean updateMount()
     {
-        return getIsTamed();
+        return true;
     }
 
     @Override
     public boolean forceUpdates()
     {
-        return getIsTamed();
+        return true;
     }
 
     @Override
@@ -1192,7 +1192,7 @@ public class MoCEntityElephant extends MoCEntityAnimal {
         if (super.attackEntityFrom(damagesource, i))
         {
             Entity entity = damagesource.getEntity();
-            if (entity != null && getIsTamed() && entity instanceof EntityPlayer) { return false; }
+            if (entity != null && entity instanceof EntityPlayer) { return false; }
             if ((riddenByEntity == entity) || (ridingEntity == entity)) { return true; }
             if ((entity != this) && (worldObj.difficultySetting != worldObj.difficultySetting.PEACEFUL))
             {
