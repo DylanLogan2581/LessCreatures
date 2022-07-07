@@ -290,11 +290,6 @@ public class MoCEntityWyvern extends MoCEntityTameableAnimal {
             {
                 setIsFlying(!getIsFlying());
             }
-
-            if (!getIsTamed() && this.dimension == MoCreatures.WyvernLairDimensionID && (rand.nextInt(50) == 0) && this.posY < 10D)
-            {
-                this.setDead();
-            }
         }
 
         if (motionY > 0.5) // prevent large boundingbox checks

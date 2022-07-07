@@ -52,17 +52,7 @@ public class MoCProxy implements IGuiHandler {
     public boolean golemDestroyBlocks;
 
     public int itemID;
-    //new blocks IDs
-    public int blockDirtID;
-    public int blockGrassID;
-    public int blockStoneID;
-    public int blockLeafID;
-    public int blockLogID;
-    public int blockTallGrassID;
-    public int blockPlanksID;
-    public int WyvernDimension;
-    public int WyvernBiomeID;
-
+    
     public int maxTamed;
     public int maxOPTamed;
     public int zebraChance;
@@ -301,8 +291,6 @@ public class MoCProxy implements IGuiHandler {
         fireOgreChance = (short) mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "FireOgreChance", 25, "The chance percentage of spawning Fire ogres in the Overworld").getInt();
         caveOgreChance = (short) mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "CaveOgreChance", 75, "The chance percentage of spawning Cave ogres at depth of 50 in the Overworld").getInt();
         golemDestroyBlocks = mocSettingsConfig.get(CATEGORY_MOC_MONSTER_GENERAL_SETTINGS, "golemDestroyBlocks", true, "Allows Big Golems to break blocks.").getBoolean(true);
-        WyvernDimension = mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairDimensionID", -17).getInt();
-        WyvernBiomeID = mocSettingsConfig.get(CATEGORY_MOC_ID_SETTINGS, "WyvernLairBiomeID", 207).getInt();
         mocSettingsConfig.save();
     }
 

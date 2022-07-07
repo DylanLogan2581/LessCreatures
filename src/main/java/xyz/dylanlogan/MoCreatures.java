@@ -32,7 +32,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -51,24 +50,10 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
-import xyz.dylanlogan.block.MoCBlockDirt;
-import xyz.dylanlogan.block.MoCBlockGrass;
-import xyz.dylanlogan.block.MoCBlockLeaf;
-import xyz.dylanlogan.block.MoCBlockLog;
-import xyz.dylanlogan.block.MoCBlockPlanks;
-import xyz.dylanlogan.block.MoCBlockRock;
-import xyz.dylanlogan.block.MoCBlockTallGrass;
-import xyz.dylanlogan.block.MultiItemBlock;
 import xyz.dylanlogan.client.MoCClientTickHandler;
 import xyz.dylanlogan.client.MoCCreativeTabs;
 import xyz.dylanlogan.client.handlers.MoCKeyHandler;
-import xyz.dylanlogan.command.CommandMoCPets;
-import xyz.dylanlogan.command.CommandMoCSpawn;
-import xyz.dylanlogan.command.CommandMoCTP;
-import xyz.dylanlogan.command.CommandMoCreatures;
 import xyz.dylanlogan.configuration.MoCProperty;
-import xyz.dylanlogan.dimension.BiomeGenWyvernLair;
-import xyz.dylanlogan.dimension.WorldProviderWyvernEnd;
 import xyz.dylanlogan.entity.ambient.MoCEntityAnt;
 import xyz.dylanlogan.entity.ambient.MoCEntityBee;
 import xyz.dylanlogan.entity.ambient.MoCEntityButterfly;
@@ -170,7 +155,6 @@ public class MoCreatures {
      */
     static int MoCEggID;// = 7772;
     static int MoCEntityID = 7256; // used internally, does not need to be configured by users
-    public static int WyvernLairDimensionID; //17;
 
     public static Block mocStone;
     public static Block mocGrass;
@@ -181,7 +165,6 @@ public class MoCreatures {
     public static Block mocTallGrass;
 
     public static ArrayList<String> multiBlockNames = new ArrayList<String>();
-    public static BiomeGenBase WyvernLairBiome;
     public static Item staffPortal;
     public static Item staffTeleport;
     public static Item builderHammer;
@@ -367,7 +350,6 @@ public class MoCreatures {
     @EventHandler
     public void load(FMLInitializationEvent event)
     {
-        DimensionManager.registerProviderType(WyvernLairDimensionID, WorldProviderWyvernEnd.class, true);
     }
 
     @EventHandler
@@ -375,9 +357,7 @@ public class MoCreatures {
     {
         isCustomSpawnerLoaded = Loader.isModLoaded("CustomSpawner");
         //ForgeChunkManager.setForcedChunkLoadingCallback(instance, new MoCloadCallback());
-        DimensionManager.registerDimension(WyvernLairDimensionID, WyvernLairDimensionID);
         // ***MUST REGISTER BIOMES AT THIS POINT TO MAKE SURE OUR ENTITIES GET ALL BIOMES FROM DICTIONARY****
-        this.WyvernLairBiome = new BiomeGenWyvernLair(MoCreatures.proxy.WyvernBiomeID);
         this.defaultBiomeSupport.add("biomesop");
         this.defaultBiomeSupport.add("extrabiomes");
         this.defaultBiomeSupport.add("highlands");
@@ -391,15 +371,8 @@ public class MoCreatures {
     public void serverStarting(FMLServerStartingEvent event)
     {
         proxy.initGUI();
-        event.registerServerCommand(new CommandMoCreatures());
-        event.registerServerCommand(new CommandMoCTP());
-        event.registerServerCommand(new CommandMoCPets());
         if (isServer())
         {
-            if (MinecraftServer.getServer().isDedicatedServer())
-            {
-                event.registerServerCommand(new CommandMoCSpawn());
-            }
         }
     }
 
@@ -616,8 +589,6 @@ public class MoCreatures {
 
     protected void InitItems()
     {
-        WyvernLairDimensionID = proxy.WyvernDimension;//17
-
         recordshuffle = new MoCItemRecord("recordshuffle");
         horsesaddle = new MoCItemHorseSaddle("horsesaddle");
 
@@ -757,28 +728,10 @@ public class MoCreatures {
         crabcooked = new MoCItemFood("crabcooked", 6, 0.6F, false);
         silversword = new MoCItemWeapon("silversword", this.SILVER);
 
-        multiBlockNames.add ("WyvernLair");
-        multiBlockNames.add("OgreLair");
-
         staffPortal = new ItemStaffPortal("staffportal");
         staffTeleport = new ItemStaffTeleport("staffteleport");
         scrollOfOwner = new MoCItem("scrollofowner");
         petamulet = new MoCItemPetAmulet("petamulet", 1);
-
-        //new blocks
-        mocStone = new MoCBlockRock("MoCStone").setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone);
-        mocGrass = new MoCBlockGrass("MoCGrass").setHardness(0.5F).setStepSound(Block.soundTypeGrass);
-        mocDirt = new MoCBlockDirt("MoCDirt").setHardness(0.6F).setStepSound(Block.soundTypeGravel);
-        //non terrain generator blocks
-        mocLeaf = new MoCBlockLeaf("MoCLeaves").setHardness(0.2F).setLightOpacity(1).setStepSound(Block.soundTypeGrass);
-        mocLog = new MoCBlockLog("MoCLog").setHardness(2.0F).setStepSound(Block.soundTypeWood);
-        mocTallGrass = new MoCBlockTallGrass("MoCTallGrass", true).setHardness(0.0F).setStepSound(Block.soundTypeGrass);     
-        mocPlank = new MoCBlockPlanks("MoCWoodPlank").setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood);
-
-        //wyvern lair block harvest settings
-        mocDirt.setHarvestLevel("shovel", 0, 0); 
-        mocGrass.setHarvestLevel("shovel", 0, 0); 
-        mocStone.setHarvestLevel("pickaxe", 1, 0);
 
         proxy.mocSettingsConfig.save();
     }

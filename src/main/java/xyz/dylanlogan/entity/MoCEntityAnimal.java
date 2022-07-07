@@ -695,10 +695,6 @@ public abstract class MoCEntityAnimal extends EntityAnimal implements IMoCEntity
         {
             return getCanSpawnHereJungle(); 
         }
-        if (s.equals("WyvernBiome")) 
-        {     
-            return getCanSpawnHereMoCBiome(); 
-        }
         return super.getCanSpawnHere();
     }
 
